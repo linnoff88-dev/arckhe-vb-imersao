@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trilha 5 - Assistentes e Multibots | Imersao Vibe Coding</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FACC15',
+            dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+
+    /* Light mode overrides - OBRIGATORIO */
+    html:not(.dark) body {
+      background-color: #f8fafc;
+    }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+
+    /* Light mode - cores de acento (trilha teal) */
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .bg-teal-500\/20 { background-color: rgba(13, 148, 136, 0.12); }
+    html:not(.dark) .bg-teal-500\/10 { background-color: rgba(13, 148, 136, 0.08); }
+    html:not(.dark) .border-teal-500\/30 { border-color: rgba(13, 148, 136, 0.25); }
+    html:not(.dark) .hover\:bg-teal-500\/30:hover { background-color: rgba(13, 148, 136, 0.18); }
+
+    /* Light mode - remove gradientes (fundo uniforme) */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+
+    /* Light mode - cores especiais */
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+
+    /* Light mode - nav */
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🚀</span>
+            <span class="font-bold text-lg hidden sm:inline">Imersao VB</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-2 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
+            <span class="sm:hidden">T1</span>
+            <span class="hidden sm:inline">Mentalidade</span>
+          </a>
+          <a href="../trilha2/index.html" class="px-2 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
+            <span class="sm:hidden">T2</span>
+            <span class="hidden sm:inline">Arquitetura</span>
+          </a>
+          <a href="../trilha3/index.html" class="px-2 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
+            <span class="sm:hidden">T3</span>
+            <span class="hidden sm:inline">Construcao</span>
+          </a>
+          <a href="../trilha4/index.html" class="px-2 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors">
+            <span class="sm:hidden">T4</span>
+            <span class="hidden sm:inline">Agentes</span>
+          </a>
+          <a href="index.html" class="px-2 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-teal-400 bg-teal-500/10">
+            <span class="sm:hidden">T5</span>
+            <span class="hidden sm:inline">Multibots</span>
+          </a>
+          <a href="../trilha6/index.html" class="px-2 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-neutral-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors">
+            <span class="sm:hidden">T6</span>
+            <span class="hidden sm:inline">Operacao</span>
+          </a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="bg-gradient-to-br from-teal-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full mb-4">
+        TRILHA 5
+      </span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🔗 Assistentes e Multibots</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">
+        Plataforma de assistentes inteligentes. Arquitetura multibot com router, bots especialistas por dominio, integracao com canais e frameworks open-source.
+      </p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-teal-400">1</div>
+          <div class="text-xs text-neutral-400">Modulo</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-teal-400">6</div>
+          <div class="text-xs text-neutral-400">Topicos</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-teal-400">~60min</div>
+          <div class="text-xs text-neutral-400">Duracao</div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600">
+          <div class="text-xl font-bold text-teal-400">Avancado</div>
+          <div class="text-xs text-neutral-400">Nivel</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <!-- NAVEGACAO RAPIDA -->
+    <div class="grid grid-cols-1 gap-4 mb-12">
+      <a href="#mod-5-1" class="bg-dark-800 rounded-xl border border-dark-600 hover:border-teal-500/50 p-4 transition-all">
+        <span class="text-teal-400 font-bold text-sm">5.1</span>
+        <h3 class="font-semibold mt-1">🔗 Assistentes e Multibots</h3>
+      </a>
+    </div>
+
+    <!-- DIVISOR -->
+    <div class="flex items-center space-x-4 mb-8">
+      <div class="flex-1 h-px bg-dark-600"></div>
+      <span class="text-neutral-500 text-sm font-medium">Conteudo Detalhado</span>
+      <div class="flex-1 h-px bg-dark-600"></div>
+    </div>
+
+    <!-- ===== MODULO 5.1 ===== -->
+    <div id="mod-5-1" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-teal-400 font-bold">5.1</span>
+          <span class="text-xs text-neutral-500">~60min</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">🔗 Assistentes e Multibots</h3>
+        <p class="text-neutral-400 text-sm">Quando usar um assistente unico vs multiplos, arquitetura multibot, bots especialistas, frameworks open-source, integracao com canais e exercicio pratico.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <!-- Topico 1 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🤖</span>
+            <div>
+              <span class="font-medium">Assistente Unico vs Multiplos</span>
+              <span class="text-neutral-500 text-sm ml-2">- Trade-offs de complexidade e escala</span>
+            </div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div>
+                <span class="text-teal-400 font-semibold">O que e:</span>
+                <p class="text-neutral-300 text-sm">A decisao arquitetural entre ter um unico bot que faz tudo (monolito) versus multiplos bots especializados (microsservicos). Cada abordagem tem trade-offs claros de custo, complexidade e capacidade.</p>
+              </div>
+              <div>
+                <span class="text-teal-400 font-semibold">Por que aprender:</span>
+                <p class="text-neutral-300 text-sm">Escolher errado no inicio significa reescrever tudo depois. Um bot unico fica burro rapido com muitas responsabilidades. Multiplos bots sem orquestracao viram caos. Saber quando usar cada um e o que separa amadores de profissionais.</p>
+              </div>
+              <div>
+                <span class="text-teal-400 font-semibold">Conceitos-chave:</span>
+                <p class="text-neutral-300 text-sm">Bot unico: simples, barato, bom ate ~5 funcoes. Multiplos bots: escalavel, isolado, necessario quando tem dominios distintos. Regra pratica: se voce precisa de system prompts diferentes por funcao, precisa de bots separados.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Topico 2 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🔀</span>
+            <div>
+              <span class="font-medium">Arquitetura Multibot</span>
+              <span class="text-neutral-500 text-sm ml-2">- Router, pods, fallback e balanceamento</span>
+            </div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div>
+                <span class="text-teal-400 font-semibold">O que e:</span>
+                <p class="text-neutral-300 text-sm">Sistema onde um router central recebe todas as mensagens, classifica a intencao e despacha para o bot especialista correto. Inclui load balancing, fallback strategies e health monitoring dos pods.</p>
+              </div>
+              <div>
+                <span class="text-teal-400 font-semibold">Por que aprender:</span>
+                <p class="text-neutral-300 text-sm">Sem router, cada bot precisa de seu proprio canal de entrada. Com router, voce tem um ponto unico de contato e roteamento inteligente. E a diferenca entre "5 bots soltos" e "uma plataforma de assistentes".</p>
+              </div>
+              <div>
+                <span class="text-teal-400 font-semibold">Conceitos-chave:</span>
+                <p class="text-neutral-300 text-sm">Router: classifica intencao com LLM leve (llama3.2, qwen2.5). Pods: instancias especializadas com system prompt proprio. Fallback: se o pod falha, redireciona para outro. Health check: monitora latencia e disponibilidade de cada pod.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Topico 3 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🎯</span>
+            <div>
+              <span class="font-medium">Bots Especialistas</span>
+              <span class="text-neutral-500 text-sm ml-2">- Marketing, vendas, suporte, conteudo, ops</span>
+            </div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div>
+                <span class="text-teal-400 font-semibold">O que e:</span>
+                <p class="text-neutral-300 text-sm">Bots com prompts e ferramentas especificas para cada dominio. Um bot de marketing gera copy e analisa metricas. Um bot de vendas qualifica leads. Um bot de suporte resolve tickets. Cada um com seu contexto, tom e capacidades.</p>
+              </div>
+              <div>
+                <span class="text-teal-400 font-semibold">Por que aprender:</span>
+                <p class="text-neutral-300 text-sm">Um bot generalista e mediano em tudo. Um bot especialista e excelente no seu dominio. A especializacao melhora a qualidade das respostas, reduz alucinacoes e permite escolher o modelo mais eficiente por funcao.</p>
+              </div>
+              <div>
+                <span class="text-teal-400 font-semibold">Conceitos-chave:</span>
+                <p class="text-neutral-300 text-sm">Cada especialista tem: system prompt focado, tools especificas, modelo otimizado (ex: Ollama para privacidade, Claude para tools complexas, DeepSeek para raciocinio). Isolamento de contexto previne vazamento de informacao entre dominios.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Topico 4 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🛠️</span>
+            <div>
+              <span class="font-medium">OpenClaw e ClaudeClaw</span>
+              <span class="text-neutral-500 text-sm ml-2">- Frameworks open-source para bots pessoais</span>
+            </div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div>
+                <span class="text-teal-400 font-semibold">O que e:</span>
+                <p class="text-neutral-300 text-sm">Frameworks de referencia para construir bots pessoais com IA. ClaudeClaw conecta Claude Code ao Telegram com sessoes persistentes. OpenClaw e a versao multi-agente com Ollama, Codex e OpenRouter integrados.</p>
+              </div>
+              <div>
+                <span class="text-teal-400 font-semibold">Por que aprender:</span>
+                <p class="text-neutral-300 text-sm">Em vez de comecar do zero, voce estuda arquiteturas que ja funcionam em producao. Entender como esses frameworks resolvem routing, memoria, sessoes e multi-canal te economiza semanas de tentativa e erro.</p>
+              </div>
+              <div>
+                <span class="text-teal-400 font-semibold">Conceitos-chave:</span>
+                <p class="text-neutral-300 text-sm">ClaudeClaw: bot.ts (Telegram), agent.ts (Claude SDK), router.ts (classificacao), CLAUDE.md (system prompt persistente), sessions/memory (SQLite). OpenClaw: multi-agent com ollama.ts, codex.ts, openrouter.ts, dashboard.ts para monitoring.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Topico 5 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">📡</span>
+            <div>
+              <span class="font-medium">Integracao com Canais</span>
+              <span class="text-neutral-500 text-sm ml-2">- Telegram, WhatsApp, web chat, multichannel</span>
+            </div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div>
+                <span class="text-teal-400 font-semibold">O que e:</span>
+                <p class="text-neutral-300 text-sm">Conectar seus bots a multiplos canais de comunicacao: Telegram, WhatsApp, web chat, Slack, Discord. Cada canal tem suas APIs, limitacoes e formatacoes. A integracao unifica a experiencia do usuario independente do canal.</p>
+              </div>
+              <div>
+                <span class="text-teal-400 font-semibold">Por que aprender:</span>
+                <p class="text-neutral-300 text-sm">Usuarios nao mudam de plataforma por voce. Voce precisa estar onde eles ja estao. Um bot que so funciona em um canal perde 80% dos usuarios potenciais. Multichannel e requisito, nao diferencial.</p>
+              </div>
+              <div>
+                <span class="text-teal-400 font-semibold">Conceitos-chave:</span>
+                <p class="text-neutral-300 text-sm">LangBot: suporta 10+ plataformas com uma API unificada. Botpress: 10 canais, visual builder, NLU nativo. Unified API: adapters por canal que normalizam mensagens para um formato comum antes de enviar ao router.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Topico 6 -->
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🏗️</span>
+            <div>
+              <span class="font-medium">Exercicio: Implementar Multibot</span>
+              <span class="text-neutral-500 text-sm ml-2">- Construir sistema com router + 2 especialistas</span>
+            </div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div>
+                <span class="text-teal-400 font-semibold">O que e:</span>
+                <p class="text-neutral-300 text-sm">Exercicio pratico para construir um sistema multibot funcional: um router que classifica mensagens e pelo menos 2 bots especialistas que processam as requisicoes no seu dominio.</p>
+              </div>
+              <div>
+                <span class="text-teal-400 font-semibold">Por que aprender:</span>
+                <p class="text-neutral-300 text-sm">Teoria sem pratica nao gera competencia. Neste exercicio voce vai enfrentar os problemas reais de routing, latencia, fallback e gerenciamento de contexto entre bots. E a habilidade que voce leva pro mercado.</p>
+              </div>
+              <div>
+                <span class="text-teal-400 font-semibold">Conceitos-chave:</span>
+                <p class="text-neutral-300 text-sm">Entregaveis: 1) Router funcional com classificacao de intencao, 2) Bot especialista A (ex: suporte), 3) Bot especialista B (ex: vendas), 4) Fallback para mensagens nao classificadas, 5) Teste end-to-end com 5 mensagens de cada tipo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <button onclick="openModal('modal-5-1')" class="px-4 py-2 text-sm bg-dark-600 hover:bg-dark-500 rounded-lg transition-colors">
+          Ver em Modal
+        </button>
+        <a href="modulo-5-1.html" class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors">
+          Ver Completo
+        </a>
+      </div>
+    </div>
+
+    <!-- NAVEGACAO INFERIOR -->
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="../trilha4/index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">
+        ← Trilha 4: Agentes
+      </a>
+      <a href="../trilha6/index.html" class="flex-1 text-center px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-500 transition-colors">
+        Trilha 6: Operacao →
+      </a>
+    </div>
+
+  </main>
+
+  <!-- MODAIS -->
+  <div id="modal-5-1" class="modal hidden fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/80" onclick="if(event.target === this) closeModal()">
+    <div class="bg-dark-800 rounded-xl w-full max-w-6xl h-[95vh] flex flex-col border border-dark-600">
+      <div class="p-4 border-b border-dark-600 flex justify-between items-center flex-shrink-0">
+        <div class="flex items-center space-x-3">
+          <span class="text-teal-400 font-bold">5.1</span>
+          <span class="font-semibold">Assistentes e Multibots</span>
+        </div>
+        <button onclick="closeModal()" class="text-neutral-400 hover:text-white text-2xl leading-none">&times;</button>
+      </div>
+      <iframe src="modulo-5-1.html" class="flex-1 w-full rounded-b-xl"></iframe>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Imersao Vibe Coding - 2026 | <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300">INEMA.CLUB</a></p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) {
+          exp.classList.remove('active');
+        }
+      });
+      explanation.classList.toggle('active');
+    }
+
+    function openModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeModal() {
+      document.querySelectorAll('.modal').forEach(modal => {
+        modal.classList.add('hidden');
+      });
+      document.body.style.overflow = 'auto';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+
+</body>
+</html>
